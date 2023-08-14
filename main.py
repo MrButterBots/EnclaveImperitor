@@ -37,5 +37,15 @@ async def suuid(ctx):
     suuid = "-".join(str(x) for x in suuid)
     await ctx.respond(suuid)
 
+@bot.slash_command(name = "roll", description="Roll a D20 dice.", guild_ids=[main_guild_id])
+async def roll(ctx):
+    result = random.randint(1, 20)
+    embed = discord.Embed(
+        title="Roll",
+        description=f"You rolled a {result}",
+        color=discord.Colour.blue()
+    )
+    await ctx.respond(embed=embed)
+
 bot.run(os.getenv("TOKEN"))
 
