@@ -1,6 +1,7 @@
 import discord
 import os
 import random
+import uuid
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,13 +29,8 @@ async def salute(ctx):
 
 @bot.slash_command(name = "suuid", description = "Generated a short user id", guild_ids=[main_guild_id])
 async def suuid(ctx):
-    chars = "abcdefghijklmnopqrstuvwxyz0123456789"
-    suuid = [None] * 4
-    for i in range(4):
-        suuid[i] = ""
-        for j in range(4):
-            suuid[i] += random.choice(chars)
-    suuid = "-".join(str(x) for x in suuid)
+    generated = str(uuid.uuid4())
+    suuid = generated[9:28]
     await ctx.respond(suuid)
 
 @bot.slash_command(name = "roll", description="Roll a D20 dice.", guild_ids=[main_guild_id])
